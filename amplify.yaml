@@ -1,0 +1,30 @@
+version: 1
+env:
+  variables:
+    # Specify the required Python version (3.8 or higher)
+    python:
+      version: 3.8
+
+frontend:
+  phases:
+    # Define your frontend build and deployment phases
+    build:
+      commands:
+        # Add commands for building your frontend
+        - npm install
+        - npm run build
+    publish:
+      commands:
+        # Add commands for deploying your frontend
+        - amplify publish
+
+backend:
+  phases:
+    build:
+      commands:
+        - update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8 11
+        - /usr/local/bin/pip3.8 install --user pipenv
+        - amplifyPush --simple
+    publish:
+      commands:
+        # Add commands for deploying your backend
